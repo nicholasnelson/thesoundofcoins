@@ -47,7 +47,7 @@ function handleUpdate(data) {
     audio.play();
     audio.onended = stopCelebration;
   }
-
+  prevSaleCount = newSaleCount;
 }
 
 function requestUpdate() {
