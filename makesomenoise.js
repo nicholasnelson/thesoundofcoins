@@ -45,7 +45,7 @@ function handleUpdate(data) {
     console.log("Celebrate! We made a sale! Many doges are with us!");
     startCelebration();
     audio.play();
-    audio.bind("ended", stopCelebration);
+    audio.onended(stopCelebration);
   }
 
 }
