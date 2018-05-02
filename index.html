@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="./style.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+
+    <div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+
+      </header>
+
+      <main role="main" class="inner">
+        <div id="main-card" class="card cs-card">
+          <div class="card-header">
+            <h1 class="cover-heading">Coin Sounds</h1>
+          </div>
+          <div class="card-body">
+            <form autocomplete="on">
+              <div class="input-group mb-3">
+                  <input id="pt-url" type="text" class="form-control" placeholder="http://your-pt-url">
+              </div>
+              <div class="input-group mb-3">
+                  <input id="pt-api-token" type="password" class="form-control" placeholder="server.api_token">
+              </div>
+
+              <div class="btn-group">
+                  <button id="toggle-start" type="button" class="btn btn-success">Start</button>
+                  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseHelp" aria-expanded="false" aria-controls="collapseHelp">
+                    Help!
+                  </button>
+              </div>
+            </form>
+            <div class="collapse" id="collapseHelp">
+              <p>This tool helps you celebrate when a coin sells.</p>
+              <p>Input your PT url including 'http://' or 'https://' and the port if needed, don't include a slash at the end of the URL. server.api_token can be found in your application.properties file.</p>
+              <p>To change the music or celebration image, replace the .mp3 and .png files with whatever you want. I suggest using a square image to avoid squishing.</p>
+              <p>Happy trades!</p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Discord @nick#4865 for help.</p>
+        </div>
+      </footer>
+
+    </div>
+
+    <div id="thedogepen"></div>
+  </body>
+
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  <script src="./makesomenoise.js"></script>
+
+</html>
