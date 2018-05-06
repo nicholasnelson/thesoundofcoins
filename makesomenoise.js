@@ -74,7 +74,7 @@ function toggleStart() {
     apiUrl = $("#pt-url").val();
     apiToken = $("#pt-api-token").val();
     // Disable buttons and input
-    $("#pt-url, #pt-api-token, #pt-api-token", "#toggle-test").attr("disabled", "disabled");
+    $("#pt-url, #pt-api-token, #pt-api-token, #toggle-test").attr("disabled", "disabled");
     timer = setInterval(requestUpdate, refreshTime);
     $("#toggle-start").text("Stop").removeClass("btn-success").addClass("btn-danger");
   } else {
