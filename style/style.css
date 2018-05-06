@@ -19,7 +19,7 @@ body {
 }
 
 .dropcoin {
-  background-image: url('./saleimage.png');
+  background-image: url('../img/saleimage.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

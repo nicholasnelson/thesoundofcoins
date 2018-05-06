@@ -13,7 +13,7 @@ var prevSaleCount = 0;
 var apiUrl = "";
 var apiToken = "";
 
-const audio = new Audio('./alert.mp3');
+const audio = new Audio('./sound/alert.mp3');
 
 function startCelebration() {
   for( i = 1 ; i < coinCount; i++) {
