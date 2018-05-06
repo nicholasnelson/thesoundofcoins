@@ -6,6 +6,7 @@ var timer = {};
 
 var firstRun = true;
 var running = false;
+var testing = false;
 var celebrating = false;
 var prevSaleCount = 0;
 
@@ -14,7 +15,6 @@ var apiToken = "";
 
 const audio = new Audio('./alert.mp3');
 
-// function to generate coins
 function startCelebration() {
   for( i = 1 ; i < coinCount; i++) {
     var dropLeft = randRange(0,$( window ).width());
@@ -27,11 +27,21 @@ function startCelebration() {
   $('html').each(function(index) {
     $( this ).addClass('celebrate-bg');
   });
+  audio.play();
+  audio.onended = stopCelebration;
 }
 
 function stopCelebration() {
+  // Remove falling coins
   $('#thedogepen').empty();
+  // Remove celebration background
   $('.celebrate-bg').removeClass('celebrate-bg');
+  // Reset testing
+  $("#toggle-test").text("Test").removeClass("btn-danger").addClass("btn-success");
+  testing = false;
+  // Stop music (if it's still running)
+  audio.pause();
+  audio.currentTime = 0;
 }
 
 function handleUpdate(data) {
@@ -44,8 +54,6 @@ function handleUpdate(data) {
   if(newSaleCount > prevSaleCount) {
     console.log("Celebrate! We made a sale! Many doges are with us!");
     startCelebration();
-    audio.play();
-    audio.onended = stopCelebration;
   }
   prevSaleCount = newSaleCount;
 }
@@ -60,29 +68,34 @@ function requestUpdate() {
   });
 }
 
-function updateToggleStartButton(running) {
-  if(running) {
+function toggleStart() {
+  running = !running;
+  if (running) {
+    apiUrl = $("#pt-url").val();
+    apiToken = $("#pt-api-token").val();
+    // Disable buttons and input
+    $("#pt-url, #pt-api-token, #pt-api-token", "#toggle-test").attr("disabled", "disabled");
+    timer = setInterval(requestUpdate, refreshTime);
     $("#toggle-start").text("Stop").removeClass("btn-success").addClass("btn-danger");
   } else {
+    apiUrl = $("#pt-url").removeAttr("disabled")
+    apiToken = $("#pt-api-token").removeAttr("disabled")
+    $("#toggle-test").removeAttr("disabled");
+    clearInterval(timer);
     $("#toggle-start").text("Start").removeClass("btn-danger").addClass("btn-success");
   }
 }
 
-function toggleStart() {
-  running = !running;
-  console.log(`Running: ${running}`)
-  if (running) {
-    apiUrl = $("#pt-url").val();
-    apiToken = $("#pt-api-token").val();
-    $("#pt-url").attr("disabled", "disabled");
-    $("#pt-api-token").attr("disabled", "disabled");
-    timer = setInterval(requestUpdate, refreshTime);
+function toggleTest() {
+  testing = !testing;
+  if(testing) {
+    console.log(`Starting celebration test.`);
+    startCelebration()
+    $("#toggle-test").text("Stop Test").removeClass("btn-success").addClass("btn-danger");
   } else {
-    apiUrl = $("#pt-url").removeAttr("disabled")
-    apiToken = $("#pt-api-token").removeAttr("disabled")
-    clearInterval(timer);
+    stopCelebration();
+    $("#toggle-test").text("Test").removeClass("btn-danger").addClass("btn-success");
   }
-  updateToggleStartButton(running);
 }
 
 // function to generate a random number range.
@@ -90,7 +103,6 @@ function randRange( minNum, maxNum) {
   return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
 }
 
-// Run once to setup button
-updateToggleStartButton();
 // Setup button trigger
 $("#toggle-start").on("click", toggleStart);
+$("#toggle-test").on("click", toggleTest);
